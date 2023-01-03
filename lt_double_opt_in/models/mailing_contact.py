@@ -4,10 +4,12 @@
 #
 # See LICENSE file for full licensing details.
 ##############################################################################
+import logging
 from odoo import api, fields, models
 from collections import defaultdict
 from odoo.addons.base.models.res_partner import _lang_get
 
+_logger = logging.getLogger(__name__)
 
 class MailingContact(models.Model):
     _inherit = 'mailing.contact'
@@ -241,13 +243,19 @@ class MailingContact(models.Model):
         contacts = self.env['res.partner'].search([])
         leads = self.env['crm.lead'].search([])
         counter = 0
+        total_count = len(contacts)
         for contact in contacts:
             counter += 1
             contact.update_mailing_contact()
-            print('Processed contacts: ', counter)
+            if counter % 100 == 0:
+                _logger.info('Processed %d of %d contacts', counter, total_count)
+        _logger.info('Processed %d of %d contacts', counter, total_count)
         counter = 0
+        total_count = len(contacts)
         for lead in leads:
             counter += 1
             lead.update_mailing_contact()
-            print('Processed leads: ', counter)
+            if counter % 100 == 0:
+                _logger.info('Processed %d of %d leads', counter, total_count)
+        _logger.info('Processed %d of %d leads', counter, total_count)
         return True
