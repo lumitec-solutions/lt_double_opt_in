@@ -26,7 +26,7 @@ class Lead(models.Model):
         self.ensure_one()
         category_names = self.tag_ids.mapped('name')
         self.env['mailing.contact'].merge_with(self.email_from,
-                                               self.partner_name,
+                                               self.contact_name,
                                                self.partner_name,
                                                self.country_id.id,
                                                self.title.id,

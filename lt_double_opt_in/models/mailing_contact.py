@@ -240,8 +240,17 @@ class MailingContact(models.Model):
         return mailing_contact_token.get_url()
 
     def action_update_mailing_contact(self):
-        contacts = self.env['res.partner'].search([])
         leads = self.env['crm.lead'].search([])
+        counter = 0
+        total_count = len(leads)
+        for lead in leads:
+            counter += 1
+            lead.update_mailing_contact()
+            if counter % 100 == 0:
+                _logger.info('Processed %d of %d leads', counter, total_count)
+        _logger.info('Processed %d of %d leads', counter, total_count)
+
+        contacts = self.env['res.partner'].search([])
         counter = 0
         total_count = len(contacts)
         for contact in contacts:
@@ -250,12 +259,4 @@ class MailingContact(models.Model):
             if counter % 100 == 0:
                 _logger.info('Processed %d of %d contacts', counter, total_count)
         _logger.info('Processed %d of %d contacts', counter, total_count)
-        counter = 0
-        total_count = len(contacts)
-        for lead in leads:
-            counter += 1
-            lead.update_mailing_contact()
-            if counter % 100 == 0:
-                _logger.info('Processed %d of %d leads', counter, total_count)
-        _logger.info('Processed %d of %d leads', counter, total_count)
         return True
