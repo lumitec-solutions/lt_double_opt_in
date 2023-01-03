@@ -19,10 +19,12 @@ class ResPartner(models.Model):
 
     def write(self, vals):
         result = super(ResPartner, self).write(vals)
-        self.update_mailing_contact()
+        for record in self:
+            record.update_mailing_contact()
         return result
 
     def update_mailing_contact(self):
+        self.ensure_one()
         category_names = self.category_id.mapped('name')
         company_name = self.parent_id.name if self.parent_id else self.name
         self.env['mailing.contact'].merge_with(self.email,
