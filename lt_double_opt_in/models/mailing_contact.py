@@ -240,8 +240,14 @@ class MailingContact(models.Model):
     def action_update_mailing_contact(self):
         contacts = self.env['res.partner'].search([])
         leads = self.env['crm.lead'].search([])
+        counter = 0
         for contact in contacts:
+            counter += 1
             contact.update_mailing_contact()
+            print('Processed contacts: ', counter)
+        counter = 0
         for lead in leads:
+            counter += 1
             lead.update_mailing_contact()
+            print('Processed leads: ', counter)
         return True
