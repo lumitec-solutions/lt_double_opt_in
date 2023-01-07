@@ -9,6 +9,8 @@ from odoo import api, models, fields
 
 class Lead(models.Model):
     _inherit = 'crm.lead'
+    MAILING_CONTACT_FIELDS = ['email_from', 'contact_name', 'partner_name', 'country_id', 'title',
+                              'lang_id', 'tag_ids']
 
     @api.model
     def create(self, vals):
@@ -18,8 +20,13 @@ class Lead(models.Model):
 
     def write(self, vals):
         result = super(Lead, self).write(vals)
-        for record in self:
-            record.update_mailing_contact()
+        mailing_contact_fields_changed = False
+        for changed_field in vals:
+            if changed_field in self.MAILING_CONTACT_FIELDS:
+                mailing_contact_fields_changed = True
+        if mailing_contact_fields_changed:
+            for record in self:
+                record.update_mailing_contact()
         return result
 
     def update_mailing_contact(self):

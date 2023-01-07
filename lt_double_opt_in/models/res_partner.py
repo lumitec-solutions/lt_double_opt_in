@@ -10,6 +10,8 @@ from odoo import _, api, fields, models
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
+    MAILING_CONTACT_FIELDS = ['email', 'name', 'parent_id', 'country_id', 'title',
+                              'lang', 'category_id']
 
     @api.model
     def create(self, vals):
@@ -19,8 +21,13 @@ class ResPartner(models.Model):
 
     def write(self, vals):
         result = super(ResPartner, self).write(vals)
-        for record in self:
-            record.update_mailing_contact()
+        mailing_contact_fields_changed = False
+        for changed_field in vals:
+            if changed_field in self.MAILING_CONTACT_FIELDS:
+                mailing_contact_fields_changed = True
+        if mailing_contact_fields_changed:
+            for record in self:
+                record.update_mailing_contact()
         return result
 
     def update_mailing_contact(self):

@@ -11,6 +11,7 @@ from odoo.addons.base.models.res_partner import _lang_get
 
 _logger = logging.getLogger(__name__)
 
+
 class MailingContact(models.Model):
     _inherit = 'mailing.contact'
 
