@@ -148,7 +148,7 @@ class MailingContact(models.Model):
         return result
 
     def _merge_mailing_contact_with_existing_mailing_contact(self, vals):
-
+        """Merge mailing contact with existing mailing contact"""
         email = vals.get('email', False)
 
         mailing_contact = False
@@ -241,6 +241,13 @@ class MailingContact(models.Model):
         return mailing_contact_token.get_url()
 
     def action_update_mailing_contact(self):
+        send_double_optin = self.env['ir.config_parameter'].sudo().get_param(
+            'lt_double_opt_in.send_double_opt_in')
+        send_double_optin_mail = False
+        if send_double_optin:
+            send_double_optin_mail = True
+            self.env["ir.config_parameter"].set_param(
+                "lt_double_opt_in.send_double_opt_in", False)
         leads = self.env['crm.lead'].search([])
         counter = 0
         total_count = len(leads)
@@ -260,4 +267,7 @@ class MailingContact(models.Model):
             if counter % 100 == 0:
                 _logger.info('Processed %d of %d contacts', counter, total_count)
         _logger.info('Processed %d of %d contacts', counter, total_count)
+        if send_double_optin_mail == True:
+            self.env["ir.config_parameter"].set_param(
+                "lt_double_opt_in.send_double_opt_in", True)
         return True

@@ -10,6 +10,7 @@ from odoo import _, api, fields, models
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
+
     MAILING_CONTACT_FIELDS = ['email', 'name', 'parent_id', 'country_id', 'title',
                               'lang', 'category_id']
 

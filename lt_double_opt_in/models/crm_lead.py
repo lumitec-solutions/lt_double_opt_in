@@ -9,6 +9,7 @@ from odoo import api, models, fields
 
 class Lead(models.Model):
     _inherit = 'crm.lead'
+
     MAILING_CONTACT_FIELDS = ['email_from', 'contact_name', 'partner_name', 'country_id', 'title',
                               'lang_id', 'tag_ids']
 
