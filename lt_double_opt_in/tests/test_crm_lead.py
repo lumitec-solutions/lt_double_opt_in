@@ -24,7 +24,13 @@ class TestLead(common.TransactionCase):
         lead = self.env['crm.lead'].create({
             'name': 'Test Leads 1',
             'email_from': 'test_1@example.com',
-            'tag_ids': [crm_tag.id]
+            'tag_ids': [crm_tag.id],
+            'street': 'Pearl street',
+            'city': 'California',
+            'country_id': self.env.ref('base.be').id,
+            'zip': '95826',
+            'phone': '+32 494 44 44 44',
+            'lang_id': self.env.ref('base.lang_en').id
         })
         mailing_contact = self.env['mailing.contact'].search([('email', '=', lead.email_from)])
         self.assertEqual(1, len(mailing_contact))
@@ -35,6 +41,12 @@ class TestLead(common.TransactionCase):
         lead = self.env['crm.lead'].create({
             'name': 'Test Leads 2',
             'email_from': 'test_2@example.com',
+            'street': 'Pearl street',
+            'city': 'California',
+            'country_id': self.env.ref('base.be').id,
+            'zip': '95826',
+            'phone': '+32 494 44 44 44',
+            'lang_id': self.env.ref('base.lang_en').id
         })
         mailing_contact = self.env['mailing.contact'].search([('email', '=', lead.email_from)])
         self.assertEqual(1, len(mailing_contact))
@@ -51,7 +63,13 @@ class TestLead(common.TransactionCase):
         lead = self.env['crm.lead'].create({
             'name': 'Test Leads 3',
             'email_from': 'test_3@example.com',
-            'tag_ids': [crm_tag.id]
+            'tag_ids': [crm_tag.id],
+            'street': 'Pearl street',
+            'city': 'California',
+            'country_id': self.env.ref('base.be').id,
+            'zip': '95826',
+            'phone': '+32 494 44 44 44',
+            'lang_id': self.env.ref('base.lang_en').id
         })
         mailing_contact = self.env['mailing.contact'].search([('email', '=', lead.email_from)])
         self.assertEqual(1, len(mailing_contact))
@@ -69,7 +87,13 @@ class TestLead(common.TransactionCase):
         lead = self.env['crm.lead'].create({
             'name': 'Test Leads 4',
             'email_from': 'test_4@example.com',
-            'tag_ids': [crm_tag.id]
+            'tag_ids': [crm_tag.id],
+            'street': 'Pearl street',
+            'city': 'California',
+            'country_id': self.env.ref('base.be').id,
+            'zip': '95826',
+            'phone': '+32 494 44 44 44',
+            'lang_id': self.env.ref('base.lang_en').id
         })
         mailing_contact = self.env['mailing.contact'].search([('email', '=', lead.email_from)])
         self.assertEqual(1, len(mailing_contact))
@@ -91,7 +115,13 @@ class TestLead(common.TransactionCase):
         lead = self.env['crm.lead'].create({
             'name': 'Test Leads 4',
             'email_from': 'test_5@example.com',
-            'tag_ids': [crm_tag.id]
+            'tag_ids': [crm_tag.id],
+            'street': 'Pearl street',
+            'city': 'California',
+            'country_id': self.env.ref('base.be').id,
+            'zip': '95826',
+            'phone': '+32 494 44 44 44',
+            'lang_id': self.env.ref('base.lang_en').id
         })
         mailing_contact = self.env['mailing.contact'].search([('email', '=', lead.email_from)])
         self.assertEqual(1, len(mailing_contact))

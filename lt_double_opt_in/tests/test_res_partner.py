@@ -17,14 +17,19 @@ class TestResPartner(common.TransactionCase):
         mailing_tag = self.env['mailing.tag'].create({
             'name': 'Partner Tag',
         })
-
         partner_tag = self.env['res.partner.category'].create({
             'name': 'Partner Tag',
         })
         partner = self.env['res.partner'].create({
             'name': 'Test Partner 1',
             'email': 'partnertest_1@example.com',
-            'category_id': [partner_tag.id]
+            'category_id': [partner_tag.id],
+            'mobile': '+1 202 555 0123',
+            'street': 'Pearl street',
+            'city': 'California',
+            'country_id': self.env.ref('base.us').id,
+            'zip': '95826',
+            'lang': 'en_US'
         })
         mailing_contact = self.env['mailing.contact'].search([('email', '=', partner.email)])
         self.assertEqual(1, len(mailing_contact))
@@ -34,6 +39,12 @@ class TestResPartner(common.TransactionCase):
         partner = self.env['res.partner'].create({
             'name': 'Test Partner 2',
             'email': 'partnertest_2@example.com',
+            'mobile': '+1 202 555 0123',
+            'street': 'Pearl street',
+            'city': 'California',
+            'country_id': self.env.ref('base.us').id,
+            'zip': '95826',
+            'lang': 'en_US'
         })
         mailing_contact = self.env['mailing.contact'].search([('email', '=', partner.email)])
         self.assertEqual(1, len(mailing_contact))
@@ -51,7 +62,13 @@ class TestResPartner(common.TransactionCase):
         partner = self.env['res.partner'].create({
             'name': 'Test Partner 3',
             'email': 'partnertest_3@example.com',
-            'category_id': [partner_tag.id]
+            'category_id': [partner_tag.id],
+            'mobile': '+1 202 555 0123',
+            'street': 'Pearl street',
+            'city': 'California',
+            'country_id': self.env.ref('base.us').id,
+            'zip': '95826',
+            'lang': 'en_US'
         })
         mailing_contact = self.env['mailing.contact'].search([('email', '=', partner.email)])
         self.assertEqual(1, len(mailing_contact))
@@ -70,7 +87,13 @@ class TestResPartner(common.TransactionCase):
         partner = self.env['res.partner'].create({
             'name': 'Test Partner 4',
             'email': 'partnertest_4@example.com',
-            'category_id': [partner_tag.id]
+            'category_id': [partner_tag.id],
+            'mobile': '+1 202 555 0123',
+            'street': 'Pearl street',
+            'city': 'California',
+            'country_id': self.env.ref('base.us').id,
+            'zip': '95826',
+            'lang': 'en_US'
         })
         mailing_contact = self.env['mailing.contact'].search([('email', '=', partner.email)])
         self.assertEqual(1, len(mailing_contact))
@@ -93,7 +116,13 @@ class TestResPartner(common.TransactionCase):
         partner = self.env['res.partner'].create({
             'name': 'Test Partner 4',
             'email': 'partnertest_5@example.com',
-            'category_id': [partner_tag.id]
+            'category_id': [partner_tag.id],
+            'mobile': '+1 202 555 0123',
+            'street': 'Pearl street',
+            'city': 'California',
+            'country_id': self.env.ref('base.us').id,
+            'zip': '95826',
+            'lang': 'en_US'
         })
         mailing_contact = self.env['mailing.contact'].search([('email', '=', partner.email)])
         self.assertEqual(1, len(mailing_contact))
