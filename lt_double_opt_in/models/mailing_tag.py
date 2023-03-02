@@ -13,13 +13,6 @@ class MailingTag(models.Model):
     _name = "mailing.tag"
     _description = "Mailing Tag"
 
-    def _get_default_color(self):
-        return randint(1, 11)
-
     name = fields.Char('Tag Name', required=True, translate=True)
-    color = fields.Integer('Color', default=_get_default_color)
+    color = fields.Integer('Color')
     send_double_opt_in = fields.Boolean(string='Send Double Opt-In', copy=False)
-
-    _sql_constraints = [
-        ('name_uniq', 'unique (name)', "Tag name already exists !"),
-    ]
